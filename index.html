@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=\, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"
+      integrity="sha512-puBpdR0798OZvTTbP4A8Ix/l+A4dHDD0DGqYW6RQ+9jxkRFclaxxQb/SJAWZfWAkuyeQUytO7+7N4QKrDh+drA=="
+      crossorigin=""
+    />
+    <script
+      src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"
+      integrity="sha512-QVftwZFqvtRNi0ZyCtsznlKSWOStnDORoefr1enyq5mVL4tmKB3S/EnC3rRJcxCPavG10IcrVGSmPh6Qw5lwrg=="
+      crossorigin=""
+    ></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.3/addons/p5.dom.min.js"></script>
+    <link rel="stylesheet" href="style.css" />
+
+    <title>ISS location</title>
+  </head>
+  <body>
+    <!-- <h1>Where is the ISS?</h1> -->
+
+    <!-- <p> -->
+    <!-- latitude: <span id="lat"></span>°<br /> -->
+    <!-- longitude: <span id="lon"></span>° <br /> -->
+    <!-- </p> -->
+
+    <div class="latitude1">Latitude:</div>
+    <div class="latitude-value"><span id="lat"></span>°<br /></div>
+    <div class="longitude1">Longitude:</div>
+    <div class="longitude-value"><span id="lon"></span>°<br /></div>
+
+    <div id="issMap"></div>
+
+    <div class="RadarBlock">
+      <div class="NameISS">Name: <span id="nam"></span><br /></div>
+      <div class="ID-number">ID: <span id="IDnum"></span><br /></div>
+      <div class="altitude1">Altitude: <span id="alt"></span> km<br /></div>
+      <div class="velocity1">Velocity: <span id="vel"></span> km/h<br /></div>
+      <div class="visibility1">Visibility: <span id="vis"></span><br /></div>
+      <div class="radar">
+        <div class="radar__dot"></div>
+        <div class="radar__dot"></div>
+        <div class="radar__dot"></div>
+      </div>
+    </div>
+
+    <div class="mainBlock">
+      <div class="firstbar">
+        <img src="images/firstbar.png" alt="" />
+      </div>
+      <div class="poly1">
+        <img src="images/Polygon 4.png" alt="" />
+      </div>
+      <div class="secondbar">
+        <img src="images/firstbar.png" alt="" />
+      </div>
+      <div class="poly2">
+        <img src="images/Polygon 4.png" alt="" />
+      </div>
+      <div class="linerect">
+        <div class="line1"></div>
+        <div class="line2"></div>
+        <div class="line3"></div>
+        <div class="line4"></div>
+      </div>
+      <div class="bar2">
+        <img src="images/secondbar.png" alt="" />
+      </div>
+      <div class="compas">
+        <img src="images/compas.png" alt="" />
+      </div>
+      <div class="arrow1">
+        <img src="images/arrow1.png" alt="" />
+      </div>
+      <div class="barometr">
+        <img src="images/barometr.png" alt="" />
+      </div>
+      <div class="arrow2">
+        <img src="images/arrow2.png" alt="" />
+      </div>
+      <div class="footprint1">Footprint: <span id="fot"></span><br /></div>
+      <div class="timestamp1">Timestamp: <span id="tim"></span><br /></div>
+      <div class="daynum1">Daynum: <span id="day"></span><br /></div>
+      <div class="solar_lat1">Solar_lat: <span id="sol"></span><br /></div>
+      <div class="solar_lon1">Solar_lon: <span id="solon"></span><br /></div>
+    </div>
+    <div class="lastblock">
+      <div class="sinegraph">
+        <img src="images/sinegraph.png" alt="" />
+      </div>
+      <div class="graphnoise">
+        <img src="images/graphnoise.png" alt="" />
+      </div>
+    </div>
+    <div class="linebr"></div>
+    <div class="info">
+      <img src="images/info.png" alt="" />
+    </div>
+
+    <div lass="rect"></div>
+
+    <script src="script.js"></script>
+    <script src="sketch.js"></script>
+
+    <footer>
+      <div></div>
+      <div></div>
+      <div></div>
+    </footer>
+    <div class="blocker1"></div>
+    <div class="blocker2"></div>
+  </body>
+</html>

@@ -1,0 +1,666 @@
+body {
+  background-color: #0c0c0c;
+  font-family: "3270 Condensed";
+  font-style: normal;
+  font-weight: 400;
+  width: 1440px;
+}
+@font-face {
+  font-family: "3270 Condensed";
+  src: local("3270 Condensed"), url(/fonts/3270Condensed-Regular.ttf);
+}
+#issMap {
+  position: absolute;
+  left: 40px;
+  top: 26px;
+  height: 401px;
+  width: 785px;
+  border-radius: 20px;
+  border: 3px solid #f9f9f9;
+}
+:root {
+  --leaflet-tile-filter: brightness(0.8) invert(1) contrast(3)
+    hue-rotate(250deg) saturate(0.2) brightness(0.7);
+}
+
+@media (prefers-color-scheme: dark) {
+  .leaflet-tile {
+    filter: var(--leaflet-tile-filter, none);
+  }
+
+  .leaflet-container {
+    background: #303030;
+  }
+}
+
+.radar {
+  position: absolute;
+  width: 168px;
+  height: 168px;
+  left: 21px;
+  top: 152px;
+  background: repeating-radial-gradient(
+        transparent,
+        transparent 4.5%,
+        rgba(76, 76, 76, 0.35) 5%,
+        transparent 5.5%
+      )
+      content-box,
+    linear-gradient(
+        transparent 49.7%,
+        rgba(76, 76, 76, 0.2) 49.9%,
+        rgba(76, 76, 76, 0.2) 50.1%,
+        transparent 50.3%
+      )
+      content-box,
+    linear-gradient(
+        to right,
+        transparent 49.7%,
+        rgba(76, 76, 76, 0.2) 49.9%,
+        rgba(76, 76, 76, 0.2) 50.1%,
+        transparent 50.3%
+      )
+      content-box,
+    radial-gradient(#0c0c0c, #0c0c0c) content-box,
+    linear-gradient(to bottom right, #ccc, #666) border-box;
+  border: 1px solid transparent;
+  border-radius: 50%;
+  box-sizing: border-box;
+  overflow: hidden;
+  /* filter: drop-shadow(1vmin 1vmin 1vmin rgba(0, 0, 0, 0.4)); */
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: conic-gradient(
+      transparent 90%,
+      rgba(249, 249, 249, 0.85)
+    );
+    border-radius: 50%;
+    box-shadow: inset 0 0 2vmin rgba(0, 0, 0, 0.9);
+    animation: spin 2s linear infinite;
+  }
+
+  .radar__dot {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 50px;
+    left: 50px;
+    animation: blink;
+  }
+
+  &__dot {
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    animation: blink 2s ease-out infinite;
+
+    &:first-of-type {
+      top: 50px;
+      left: 50px;
+      animation-delay: 0.25s;
+    }
+
+    &:nth-of-type(2) {
+      top: 50px;
+      left: 50px;
+      animation-delay: 1.25s;
+    }
+
+    &:last-of-type {
+      top: 50px;
+      left: 50px;
+      animation-delay: 1.75s;
+    }
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(1turn);
+  }
+}
+
+@keyframes blink {
+  2%,
+  20% {
+    background-color: rgba(80, 255, 0, 0.85);
+    box-shadow: 0 0 1vmin rgba(80, 255, 0, 0.6);
+  }
+
+  90% {
+    background-color: transparent;
+  }
+}
+
+.rect {
+  position: absolute;
+  top: 400px;
+  left: 100px;
+  background-color: white;
+  height: 20px;
+  width: 200px;
+}
+.latitude1 {
+  position: absolute;
+  width: 125px;
+  height: 35px;
+  left: 855px;
+  top: 118px;
+  font-size: 32px;
+  line-height: 35px;
+  color: #f9f9f9;
+}
+.latitude-value {
+  position: absolute;
+  width: 440px;
+  height: 98px;
+  left: 850px;
+  top: 160px;
+  font-size: 90px;
+  line-height: 98px;
+  color: #f9f9f9;
+}
+.longitude1 {
+  position: absolute;
+  width: 141px;
+  height: 35px;
+  left: 855px;
+  top: 296px;
+  font-size: 32px;
+  line-height: 35px;
+  color: #f9f9f9;
+}
+.longitude-value {
+  position: absolute;
+  width: 440px;
+  height: 98px;
+  left: 850px;
+  top: 338px;
+  font-size: 90px;
+  line-height: 98px;
+  color: #f9f9f9;
+}
+.RadarBlock {
+  position: absolute;
+  width: 210px;
+  height: 340px;
+  left: 40px;
+  top: 455px;
+  border: 3px solid #f9f9f9;
+  border-radius: 20px;
+}
+.NameISS {
+  position: absolute;
+  width: 71px;
+  height: 17px;
+  left: 23px;
+  top: 22px;
+  font-size: 16px;
+  line-height: 17px;
+  color: #f9f9f9;
+}
+.ID-number {
+  position: absolute;
+  width: 71px;
+  height: 17px;
+  left: 23px;
+  top: 45px;
+  font-size: 16px;
+  line-height: 17px;
+  color: #f9f9f9;
+}
+.altitude1 {
+  position: absolute;
+  width: 188px;
+  height: 17px;
+  left: 23px;
+  top: 68px;
+  font-size: 16px;
+  line-height: 17px;
+  color: #f9f9f9;
+}
+.velocity1 {
+  position: absolute;
+  width: 181px;
+  height: 17px;
+  left: 23px;
+  top: 91px;
+  font-size: 16px;
+  line-height: 17px;
+  color: #f9f9f9;
+}
+.visibility1 {
+  position: absolute;
+  width: 157px;
+  height: 17px;
+  left: 23px;
+  top: 114px;
+  font-size: 16px;
+  line-height: 17px;
+  color: #f9f9f9;
+}
+
+.mainBlock {
+  position: absolute;
+  width: 675px;
+  height: 340px;
+  left: 280px;
+  top: 455px;
+  border: 3px solid #f9f9f9;
+  border-radius: 20px;
+}
+img {
+  width: 100%;
+  height: 100%;
+}
+.firstbar {
+  position: absolute;
+  width: 443px;
+  height: 40px;
+  left: 18px;
+  top: 19px;
+}
+.poly1 {
+  position: absolute;
+  width: 21px;
+  height: 33px;
+  left: 177px;
+  top: 35px;
+  animation-name: polymove;
+  animation-duration: 10s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+@keyframes polymove {
+  0% {
+    left: 177px;
+  }
+
+  20% {
+    left: 67px;
+  }
+  30% {
+    left: 87px;
+  }
+  50% {
+    left: 127px;
+  }
+  70% {
+    left: 227px;
+  }
+  90% {
+    left: 337px;
+  }
+}
+.secondbar {
+  position: absolute;
+  width: 443px;
+  height: 40px;
+  left: 18px;
+  top: 83px;
+}
+.poly2 {
+  position: absolute;
+  width: 21px;
+  height: 33px;
+  left: 249px;
+  top: 102px;
+  animation-name: polymove2;
+  animation-duration: 10s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+@keyframes polymove2 {
+  0% {
+    left: 249px;
+  }
+
+  30% {
+    left: 327px;
+  }
+  40% {
+    left: 189px;
+  }
+  60% {
+    left: 107px;
+  }
+  70% {
+    left: 137px;
+  }
+  80% {
+    left: 97px;
+  }
+}
+.sine {
+  position: absolute;
+  top: 600px;
+  left: 600px;
+  width: 200px;
+  height: 399px;
+}
+footer {
+  position: fixed;
+  top: 530px;
+  left: 0;
+  right: 0;
+  height: 40px;
+  z-index: -5;
+}
+footer div {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 200%;
+}
+@keyframes wave {
+  0% {
+    transform: translatex(-100vw) scaley(1);
+  }
+  50% {
+    transform: translatex(-50vw) scaley(1);
+  }
+  100% {
+    transform: translatex(0) scaley(1);
+  }
+}
+footer div:nth-child(1) {
+  background: url("images/Waves.png");
+  background-blend-mode: lighten;
+  animation: wave 50s linear infinite;
+}
+footer div:nth-child(2) {
+  background: url("images/Waves2.png");
+  animation: wave 60s linear infinite;
+}
+.blocker1 {
+  position: absolute;
+  width: 1013px;
+  height: 144px;
+  left: 0px;
+  top: 484px;
+  background: #0c0c0c;
+  z-index: -4;
+}
+.blocker2 {
+  position: absolute;
+  width: 90px;
+  height: 144px;
+  right: 0px;
+  top: 484px;
+  background: #0c0c0c;
+  z-index: -3;
+}
+.linerect {
+  position: absolute;
+  width: 250px;
+  height: 122px;
+  left: 30px;
+  top: 158px;
+  border: 1px solid #f9f9f9;
+}
+.line1 {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 7px;
+  height: 61px;
+  background-color: #f9f9f9;
+  animation-name: line1move;
+  animation-duration: 20s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+@keyframes line1move {
+  0% {
+    left: 0px;
+  }
+  50% {
+    left: 244px;
+  }
+  100% {
+    left: 0px;
+  }
+}
+.line2 {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 2px;
+  height: 61px;
+  background-color: #f9f9f9;
+  animation-name: line1move;
+  animation-duration: 15s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+.line3 {
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  width: 7px;
+  height: 61px;
+  background-color: #f9f9f9;
+  animation-name: line2move;
+  animation-duration: 22s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+@keyframes line2move {
+  0% {
+    right: 0px;
+  }
+  50% {
+    right: 244px;
+  }
+  100% {
+    right: 0px;
+  }
+}
+.line4 {
+  position: absolute;
+  bottom: 0px;
+  right: 0px;
+  width: 2px;
+  height: 61px;
+  background-color: #f9f9f9;
+  animation-name: line2move;
+  animation-duration: 17s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+.bar2 {
+  position: absolute;
+  width: 258px;
+  height: 38px;
+  left: 28px;
+  top: 282px;
+}
+.compas {
+  position: absolute;
+  width: 168px;
+  height: 168px;
+  left: 300px;
+  top: 149px;
+  transform: rotate(0deg);
+  animation-name: compas;
+  animation-duration: 25s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+.arrow1 {
+  position: absolute;
+  width: 21px;
+  height: 96px;
+  left: 374px;
+  top: 185px;
+}
+@keyframes compas {
+  0% {
+    transform: rotate(0deg);
+  }
+  20% {
+    transform: rotate(20deg);
+  }
+  40% {
+    transform: rotate(60deg);
+  }
+  60% {
+    transform: rotate(10deg);
+  }
+  80% {
+    transform: rotate(-50deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+.barometr {
+  position: absolute;
+  width: 165px;
+  height: 165px;
+  left: 486px;
+  top: 149px;
+}
+.arrow2 {
+  position: absolute;
+  width: 8px;
+  height: 84px;
+  left: 566px;
+  top: 188px;
+  transform: rotate(0deg);
+  animation-name: arrow2;
+  animation-duration: 15s;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+@keyframes arrow2 {
+  0% {
+    transform: rotate(0deg);
+  }
+  10% {
+    transform: rotate(10deg);
+  }
+  20% {
+    transform: rotate(20deg);
+  }
+  30% {
+    transform: rotate(-40deg);
+  }
+  50% {
+    transform: rotate(-50deg);
+  }
+  60% {
+    transform: rotate(-30deg);
+  }
+  70% {
+    transform: rotate(10deg);
+  }
+  90% {
+    transform: rotate(15deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+.footprint1 {
+  position: absolute;
+  width: 141px;
+  height: 17px;
+  left: 488px;
+  top: 18px;
+  font-size: 16px;
+  line-height: 17px;
+  color: #f9f9f9;
+}
+.timestamp1 {
+  position: absolute;
+  width: 165px;
+  height: 17px;
+  left: 488px;
+  top: 41px;
+  font-size: 16px;
+  line-height: 17px;
+  color: #f9f9f9;
+}
+.daynum1 {
+  position: absolute;
+  width: 148px;
+  height: 17px;
+  left: 488px;
+  top: 64px;
+  font-size: 16px;
+  line-height: 17px;
+  color: #f9f9f9;
+}
+.solar_lat1 {
+  position: absolute;
+  width: 145px;
+  height: 17px;
+  left: 488px;
+  top: 87px;
+  font-size: 16px;
+  line-height: 17px;
+  color: #f9f9f9;
+}
+.solar_lon1 {
+  position: absolute;
+  width: 153px;
+  height: 17px;
+  left: 488px;
+  top: 110px;
+  font-size: 16px;
+  line-height: 17px;
+  color: #f9f9f9;
+}
+.p5Canvas {
+  position: absolute;
+  width: 300px;
+  height: 200px;
+  left: 1013px;
+  top: 642px;
+  border: 1px solid #f9f9f9;
+}
+.lastblock {
+  position: absolute;
+  width: 410px;
+  height: 340px;
+  left: 985px;
+  top: 455px;
+  border: 3px solid #f9f9f9;
+  border-radius: 20px;
+}
+.sinegraph {
+  position: absolute;
+  width: 384px;
+  height: 145px;
+  left: 24px;
+  top: 20px;
+}
+.graphnoise {
+  position: absolute;
+  width: 41px;
+  height: 145px;
+  left: 370px;
+  top: 181px;
+}
+.linebr {
+  position: absolute;
+  width: 550px;
+  height: 3px;
+  left: 852px;
+  top: 268px;
+  background-color: #f9f9f9;
+}
+.info {
+  position: absolute;
+  width: 550px;
+  height: 50px;
+  left: 852px;
+  top: 36px;
+}
