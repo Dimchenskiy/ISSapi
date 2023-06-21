@@ -1,6 +1,3 @@
-// Making a map and tiles
-// Setting a higher initial zoom to make effect more obvious
-let longitude;
 const mymap = L.map("issMap").setView([0, 0], 4);
 const attribution =
   '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
@@ -9,7 +6,6 @@ const tileUrl = "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png";
 const tiles = L.tileLayer(tileUrl, { attribution });
 tiles.addTo(mymap);
 
-// Making a marker with a custom icon
 const issIcon = L.icon({
   iconUrl: "ChromeISS.png",
   iconSize: [289, 193],
@@ -39,7 +35,6 @@ async function getISS() {
     solar_lon,
   } = data;
 
-  // Always set the view to current lat lon and zoom!
   mymap.setView([latitude, longitude], mymap.getZoom());
   marker.setLatLng([latitude, longitude]);
 
@@ -55,12 +50,6 @@ async function getISS() {
   document.getElementById("day").textContent = daynum.toFixed(2);
   document.getElementById("sol").textContent = solar_lat.toFixed(4);
   document.getElementById("solon").textContent = solar_lon.toFixed(4);
-
-  // console.log(((latitude - Math.floor(latitude)) * 100).toFixed(0));
-  // console.log(latitude);
-
-  var her = ((longitude - Math.floor(longitude)) * 100).toFixed(0);
-  console.log(longitude);
 }
 
 getISS();
