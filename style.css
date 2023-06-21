@@ -7,7 +7,8 @@ body {
 }
 @font-face {
   font-family: "3270 Condensed";
-  src: local("3270 Condensed"), url(/fonts/3270Condensed-Regular.ttf);
+  src: url("fonts/3270Condensed-Regular.woff") format("woff");
+  font-weight: normal;
 }
 #issMap {
   position: absolute;
